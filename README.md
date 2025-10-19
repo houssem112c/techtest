@@ -292,46 +292,7 @@ npm run lint           # Run ESLint for code quality checks
 - **Form Submission**: preventDefault to avoid page reload
 - **Click Handlers**: Arrow functions for button clicks
 - **Input Changes**: Controlled inputs with onChange
-
-## 🐛 Troubleshooting
-
-### Cannot Connect to Backend
-**Problem**: `Network Error` or `ERR_CONNECTION_REFUSED`
-- **Check**: Backend server is running on port 3000
-- **Check**: `NEXT_PUBLIC_API_URL` in `.env.local` is correct
-- **Check**: No CORS errors in browser console
-- **Solution**: Start backend with `npm run start:dev`
-
-### Authentication Errors
-**Problem**: Redirected to login repeatedly
-- **Check**: Tokens exist in localStorage (Browser DevTools > Application > Local Storage)
-- **Check**: Tokens not expired (access token expires in 15 minutes)
-- **Solution**: Clear localStorage and login again:
-  ```javascript
-  // In browser console:
-  localStorage.clear();
-  ```
-
-### Page Not Found
-**Problem**: 404 error on custom routes
-- **Check**: File structure matches route (folder name = route segment)
-- **Check**: `page.tsx` file exists in folder
-- **Check**: No typos in URL
-- **Restart**: Development server after adding new routes
-
-### Hydration Mismatch
-**Problem**: Warning about hydration mismatch
-- **Cause**: Server HTML doesn't match client render
-- **Solution**: Use `mounted` state to prevent rendering until client-side
-- **Pattern**: Already implemented in home page
-
-### Build Errors
-**Problem**: Build fails with TypeScript errors
-- **Check**: All imports have correct paths
-- **Check**: No unused variables (ESLint rules)
-- **Check**: All required props passed to components
-- **Solution**: Fix TypeScript errors shown in terminal
-
+- 
 ## 🎯 Technology Stack
 
 - **[Next.js](https://nextjs.org/)** v14.0.0 - React framework with App Router
@@ -353,30 +314,6 @@ npm run lint           # Run ESLint for code quality checks
 - **useRouter**: Navigation
 - **useParams**: URL parameters
 
-## 📖 Additional Resources
-
-### Official Documentation
-- [Next.js Documentation](https://nextjs.org/docs)
-- [React Documentation](https://react.dev/)
-- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
-- [Axios Documentation](https://axios-http.com/docs/intro)
-
-### Code Documentation
-- [Frontend Code Documentation](CODE_DOCUMENTATION.md) - Detailed line-by-line explanation of all frontend code
-
-### Learning Resources
-- [Next.js App Router Tutorial](https://nextjs.org/learn)
-- [React Hooks Guide](https://react.dev/reference/react)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-1. Push code to GitHub
-2. Import repository in [Vercel](https://vercel.com)
-3. Configure environment variables:
-   - `NEXT_PUBLIC_API_URL`: Your production backend URL
-4. Deploy automatically
 
 ### Manual Build
 ```sh
@@ -388,10 +325,5 @@ npm run start    # Serves production build
 - Update `NEXT_PUBLIC_API_URL` to production backend URL
 - Ensure backend CORS allows your frontend domain
 
-## 📄 License
 
-MIT License - Free to use for learning and development.
-
----
-
-**Built with ❤️ using Next.js, React, and TypeScript**
+**Built by Houssem Ben Mabrouk  using Next.js, React, and TypeScript**

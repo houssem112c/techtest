@@ -4,9 +4,12 @@ import { useState, FormEvent, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { articlesApi } from '@/lib/api';
 import { isAdmin, getUser } from '@/lib/auth';
+import { useTranslation } from '@/contexts/LanguageContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 export default function CreateArticle() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [isPublished, setIsPublished] = useState(false);
@@ -35,8 +38,7 @@ export default function CreateArticle() {
       router.push('/');
     } catch (err: any) {
       setError(
-        err.response?.data?.message ||
-          'Failed to create article. Please try again.'
+        err.response?.data?.message || t.pages.createArticle.error
       );
     } finally {
       setLoading(false);
@@ -47,19 +49,22 @@ export default function CreateArticle() {
     <>
       <nav className="navbar">
         <div className="container navbar-content">
-          <h1>DCMS</h1>
-          <button className="btn btn-secondary" onClick={() => router.push('/')}>
-            Back to Home
-          </button>
+          <h1>{t.common.appName}</h1>
+          <div className="navbar-actions">
+            <LanguageSwitcher />
+            <button className="btn btn-secondary" onClick={() => router.push('/')}>
+              Back to Home
+            </button>
+          </div>
         </div>
       </nav>
 
       <div className="container">
         <div className="form-container" style={{ maxWidth: '800px' }}>
-          <h2>Create Article</h2>
+          <h2>{t.pages.createArticle.title}</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="title">{t.pages.createArticle.articleTitle}</label>
               <input
                 type="text"
                 id="title"
@@ -69,7 +74,7 @@ export default function CreateArticle() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="content">Content</label>
+              <label htmlFor="content">{t.pages.createArticle.content}</label>
               <textarea
                 id="content"
                 value={content}
@@ -85,7 +90,7 @@ export default function CreateArticle() {
                 checked={isPublished}
                 onChange={(e) => setIsPublished(e.target.checked)}
               />
-              <label htmlFor="isPublished">Publish immediately</label>
+              <label htmlFor="isPublished">{t.pages.createArticle.publish}</label>
             </div>
             {error && <div className="error">{error}</div>}
             <button
@@ -94,7 +99,7 @@ export default function CreateArticle() {
               disabled={loading}
               style={{ width: '100%', marginTop: '1rem' }}
             >
-              {loading ? 'Creating...' : 'Create Article'}
+              {loading ? `${t.common.loading}` : t.pages.createArticle.submit}
             </button>
           </form>
         </div>

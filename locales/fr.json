@@ -1,0 +1,110 @@
+{
+  "common": {
+    "appName": "DCMS",
+    "loading": "Chargement...",
+    "welcome": "Bienvenue",
+    "by": "Par",
+    "filter": "Filtrer",
+    "confirm": "Êtes-vous sûr?",
+    "error": "Erreur",
+    "success": "Succès",
+    "updated": "Mis à jour"
+  },
+  "nav": {
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "logout": "Déconnexion",
+    "createArticle": "Créer un article",
+    "profile": "Profil"
+  },
+  "pages": {
+    "home": {
+      "title": "Articles",
+      "noArticles": "Aucun article trouvé.",
+      "loadingArticles": "Chargement des articles...",
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cet article?",
+      "deleteFailed": "Échec de la suppression de l'article",
+      "updateFailed": "Échec de la mise à jour de l'article"
+    },
+    "login": {
+      "title": "Connexion",
+      "email": "Email",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "noAccount": "Vous n'avez pas de compte?",
+      "registerLink": "S'inscrire ici",
+      "error": "Connexion échouée. Veuillez vérifier vos identifiants."
+    },
+    "register": {
+      "title": "S'inscrire",
+      "email": "Email",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "S'inscrire",
+      "hasAccount": "Vous avez déjà un compte ?",
+      "loginLink": "Connectez-vous ici",
+      "passwordMismatch": "Les mots de passe ne correspondent pas",
+      "error": "L'inscription a échoué. Veuillez réessayer.",
+      "sendOtp": "Envoyer le code de vérification",
+      "verifyOtp": "Vérifier et s'inscrire",
+      "otpCode": "Code de vérification",
+      "otpSent": "Code de vérification envoyé à votre email !",
+      "otpError": "Échec de l'envoi du code de vérification",
+      "verifyError": "Code de vérification invalide ou expiré",
+      "resendOtp": "Renvoyer le code",
+      "enterOtp": "Entrez le code à 6 chiffres envoyé à votre email"
+    },
+    "createArticle": {
+      "title": "Créer un article",
+      "articleTitle": "Titre",
+      "content": "Contenu",
+      "publish": "Publier immédiatement",
+      "submit": "Créer l'article",
+      "success": "Article créé avec succès!",
+      "error": "Échec de la création de l'article"
+    },
+    "editArticle": {
+      "title": "Modifier l'article",
+      "articleTitle": "Titre",
+      "content": "Contenu",
+      "publish": "Publié",
+      "submit": "Mettre à jour l'article",
+      "loading": "Chargement de l'article...",
+      "success": "Article mis à jour avec succès!",
+      "error": "Échec de la mise à jour de l'article",
+      "notFound": "Article non trouvé"
+    },
+    "profile": {
+      "title": "Profil",
+      "email": "Email",
+      "role": "Rôle",
+      "memberSince": "Membre depuis",
+      "changePassword": "Changer le mot de passe",
+      "currentPassword": "Mot de passe actuel",
+      "newPassword": "Nouveau mot de passe",
+      "confirmNewPassword": "Confirmer le nouveau mot de passe",
+      "submit": "Changer le mot de passe",
+      "success": "Mot de passe changé avec succès!",
+      "error": "Échec du changement de mot de passe",
+      "passwordMismatch": "Les nouveaux mots de passe ne correspondent pas",
+      "loading": "Chargement du profil..."
+    }
+  },
+  "articles": {
+    "filter": {
+      "all": "Tous les articles",
+      "published": "Publiés uniquement",
+      "drafts": "Brouillons uniquement"
+    },
+    "status": {
+      "published": "Publié",
+      "draft": "Brouillon"
+    },
+    "actions": {
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "publish": "Publier",
+      "unpublish": "Dépublier"
+    }
+  }
+}

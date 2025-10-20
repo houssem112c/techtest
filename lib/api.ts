@@ -86,9 +86,27 @@ export interface Article {
   updatedAt: string;
 }
 
+export interface UserProfile {
+  id: string;
+  email: string;
+  role: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export const authApi = {
   register: async (email: string, password: string): Promise<AuthResponse> => {
     const response = await api.post('/auth/register', { email, password });
+    return response.data;
+  },
+
+  sendOtp: async (email: string, password: string): Promise<{ message: string }> => {
+    const response = await api.post('/auth/send-otp', { email, password });
+    return response.data;
+  },
+
+  verifyOtp: async (email: string, otp: string): Promise<AuthResponse> => {
+    const response = await api.post('/auth/verify-otp', { email, otp });
     return response.data;
   },
 
@@ -103,8 +121,9 @@ export const authApi = {
 };
 
 export const articlesApi = {
-  getAll: async (): Promise<Article[]> => {
-    const response = await api.get('/articles');
+  getAll: async (filter?: 'all' | 'published' | 'draft'): Promise<Article[]> => {
+    const params = filter ? { filter } : {};
+    const response = await api.get('/articles', { params });
     return response.data;
   },
 
@@ -132,5 +151,23 @@ export const articlesApi = {
 
   delete: async (id: string): Promise<void> => {
     await api.delete(`/articles/${id}`);
+  },
+};
+
+export const usersApi = {
+  getProfile: async (): Promise<UserProfile> => {
+    const response = await api.get('/users/profile');
+    return response.data;
+  },
+
+  changePassword: async (
+    currentPassword: string,
+    newPassword: string
+  ): Promise<{ message: string }> => {
+    const response = await api.patch('/users/change-password', {
+      currentPassword,
+      newPassword,
+    });
+    return response.data;
   },
 };

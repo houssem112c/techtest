@@ -1,19 +1,20 @@
 import {
-    Controller,
-    Get,
-    Post,
-    Body,
-    Patch,
-    Param,
-    Delete,
-    UseGuards,
-    Request,
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Request,
+  Query,
 } from '@nestjs/common';
 import {
-    ApiTags,
-    ApiOperation,
-    ApiResponse,
-    ApiBearerAuth,
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
@@ -58,8 +59,11 @@ export class ArticlesController {
     description: 'List of articles',
     type: [ArticleResponseDto],
   })
-  findAll(@Request() req): Promise<ArticleResponseDto[]> {
-    return this.articlesService.findAll(req.user.role);
+  findAll(
+    @Request() req,
+    @Query('filter') filter?: 'all' | 'published' | 'draft',
+  ): Promise<ArticleResponseDto[]> {
+    return this.articlesService.findAll(req.user.role, filter);
   }
 
   @Get(':id')

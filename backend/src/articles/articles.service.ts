@@ -1,6 +1,6 @@
 import {
-    Injectable,
-    NotFoundException
+  Injectable,
+  NotFoundException
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -29,14 +29,32 @@ export class ArticlesService {
     return this.toResponseDto(savedArticle);
   }
 
-  async findAll(userRole: UserRole): Promise<ArticleResponseDto[]> {
+  async findAll(
+    userRole: UserRole,
+    filter?: 'all' | 'published' | 'draft',
+  ): Promise<ArticleResponseDto[]> {
     let articles: Article[];
 
     if (userRole === UserRole.ADMIN) {
-      articles = await this.articlesRepository.find({
-        order: { createdAt: 'DESC' },
-      });
+      // Admin can filter articles
+      if (filter === 'published') {
+        articles = await this.articlesRepository.find({
+          where: { isPublished: true },
+          order: { createdAt: 'DESC' },
+        });
+      } else if (filter === 'draft') {
+        articles = await this.articlesRepository.find({
+          where: { isPublished: false },
+          order: { createdAt: 'DESC' },
+        });
+      } else {
+        // 'all' or no filter
+        articles = await this.articlesRepository.find({
+          order: { createdAt: 'DESC' },
+        });
+      }
     } else {
+      // Regular users only see published articles
       articles = await this.articlesRepository.find({
         where: { isPublished: true },
         order: { createdAt: 'DESC' },

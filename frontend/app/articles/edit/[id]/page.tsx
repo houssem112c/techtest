@@ -4,10 +4,13 @@ import { useState, FormEvent, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { articlesApi } from '@/lib/api';
 import { isAdmin, getUser } from '@/lib/auth';
+import { useTranslation } from '@/contexts/LanguageContext';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 export default function EditArticle() {
   const router = useRouter();
   const params = useParams();
+  const { t } = useTranslation();
   const id = params.id as string;
 
   const [title, setTitle] = useState('');
@@ -37,7 +40,7 @@ export default function EditArticle() {
       setContent(article.content);
       setIsPublished(article.isPublished);
     } catch (err) {
-      setError('Failed to load article');
+      setError(t.pages.editArticle.error);
     } finally {
       setLoading(false);
     }
@@ -53,8 +56,7 @@ export default function EditArticle() {
       router.push('/');
     } catch (err: any) {
       setError(
-        err.response?.data?.message ||
-          'Failed to update article. Please try again.'
+        err.response?.data?.message || t.pages.editArticle.error
       );
     } finally {
       setSubmitting(false);
@@ -64,7 +66,7 @@ export default function EditArticle() {
   if (loading) {
     return (
       <div className="container">
-        <p>Loading...</p>
+        <p>{t.pages.editArticle.loading}</p>
       </div>
     );
   }
@@ -73,19 +75,22 @@ export default function EditArticle() {
     <>
       <nav className="navbar">
         <div className="container navbar-content">
-          <h1>DCMS</h1>
-          <button className="btn btn-secondary" onClick={() => router.push('/')}>
-            Back to Home
-          </button>
+          <h1>{t.common.appName}</h1>
+          <div className="navbar-actions">
+            <LanguageSwitcher />
+            <button className="btn btn-secondary" onClick={() => router.push('/')}>
+              Back to Home
+            </button>
+          </div>
         </div>
       </nav>
 
       <div className="container">
         <div className="form-container" style={{ maxWidth: '800px' }}>
-          <h2>Edit Article</h2>
+          <h2>{t.pages.editArticle.title}</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="title">{t.pages.editArticle.articleTitle}</label>
               <input
                 type="text"
                 id="title"
@@ -95,7 +100,7 @@ export default function EditArticle() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="content">Content</label>
+              <label htmlFor="content">{t.pages.editArticle.content}</label>
               <textarea
                 id="content"
                 value={content}
@@ -111,7 +116,7 @@ export default function EditArticle() {
                 checked={isPublished}
                 onChange={(e) => setIsPublished(e.target.checked)}
               />
-              <label htmlFor="isPublished">Published</label>
+              <label htmlFor="isPublished">{t.pages.editArticle.publish}</label>
             </div>
             {error && <div className="error">{error}</div>}
             <button
@@ -120,7 +125,7 @@ export default function EditArticle() {
               disabled={submitting}
               style={{ width: '100%', marginTop: '1rem' }}
             >
-              {submitting ? 'Updating...' : 'Update Article'}
+              {submitting ? `${t.common.loading}` : t.pages.editArticle.submit}
             </button>
           </form>
         </div>

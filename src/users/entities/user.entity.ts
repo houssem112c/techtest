@@ -1,9 +1,10 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  OneToMany,
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    CreateDateColumn,
+    UpdateDateColumn,
+    OneToMany,
 } from 'typeorm';
 import { UserRole } from '../../common/enums/user-role.enum';
 import { Article } from '../../articles/entities/article.entity';
@@ -31,6 +32,9 @@ export class User {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 
   @OneToMany(() => Article, (article) => article.author)
   articles: Article[];
